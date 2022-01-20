@@ -2,6 +2,7 @@ package com.volboy.sampledagger
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.volboy.sampledagger.feature.di.DaggerFeatureComponent
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -15,16 +16,20 @@ class MainActivity : AppCompatActivity() {
         appComponent.inject(this)
         repositoryImpl.getData()
 
-        //пример создание FeatureComponent c временем жизни - mainActivity
-        val featureComponent = appComponent.featureComponent().build()
+        /**
+         * пример получения FeatureComponent при использовании dependencies вместо SubComponent
+         */
+        val featureComponent = DaggerFeatureComponent.builder()
+            .appComponent(appComponent)
+            .build()
         val someFeatureClass = featureComponent.provideSomeFeatureClass()
-
+        someFeatureClass.someFun()
     }
 
-     /**аннотация inject на методе приведет к тому
-     что метод вызовется в момент инжекта зависимостей
-     в класс mainActivity, все завимисимости в методе
-     разрезолвит даггер*/
+    /**аннотация inject на методе приведет к тому
+    что метод вызовется в момент инжекта зависимостей
+    в класс mainActivity, все завимисимости в методе
+    разрезолвит даггер*/
     @Inject
     fun trackOnStart(analytics: Analytics) {
         analytics.getAnalytics()
