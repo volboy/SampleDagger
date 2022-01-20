@@ -1,14 +1,14 @@
 package com.volboy.sampledagger.dagger
 
 import com.volboy.sampledagger.NetworkProvider
-import com.volboy.sampledagger.Repository
+import com.volboy.sampledagger.RepositoryImpl
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, AppBindModule::class])
 class MainModule {
 
     @Provides
-    fun provideRepository(networkProvider: NetworkProvider): Repository =
-        Repository(networkProvider)
+    fun provideRepositoryImpl(networkProvider: NetworkProvider): RepositoryImpl =
+        RepositoryImpl(networkProvider)
 }

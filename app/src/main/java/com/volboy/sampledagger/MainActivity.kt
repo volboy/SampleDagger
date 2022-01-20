@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var repository: Repository
+    lateinit var repositoryImpl: Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
         appComponent.inject(this)
         val app = App()
         app.appComponent
-        repository.getData()
+        repositoryImpl.getData()
     }
 }
