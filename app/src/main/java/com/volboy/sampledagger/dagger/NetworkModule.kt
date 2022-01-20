@@ -9,12 +9,14 @@ class NetworkModule {
 
     @Provides
     @Prod
+    @AppScope
     fun provideNetworkProviderProd(): NetworkProvider {
         return NetworkProvider("www.prod.ru")
     }
 
     @Provides
     @Stage
+    @AppScope
     fun provideNetworkProviderStage(): NetworkProvider {
         return NetworkProvider("www.stage.ru")
     }
