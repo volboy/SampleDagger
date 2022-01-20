@@ -1,4 +1,6 @@
 package com.volboy.sampledagger
 
-class NetworkProvider {
+import javax.inject.Inject
+
+class NetworkProvider @Inject constructor() {
 }
