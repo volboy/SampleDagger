@@ -13,9 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appComponent.inject(this)
-        val app = App()
-        app.appComponent
         repositoryImpl.getData()
+
+        //пример создание FeatureComponent c временем жизни - mainActivity
+        val featureComponent = appComponent.featureComponent().build()
+        val someFeatureClass = featureComponent.provideSomeFeatureClass()
+
     }
 
      /**аннотация inject на методе приведет к тому
