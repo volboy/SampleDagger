@@ -7,8 +7,7 @@ import com.volboy.sampledagger.dagger.DaggerAppComponent
 
 class App : Application() {
 
-    lateinit var appComponent: AppComponent
-        private set
+    internal var appComponent: AppComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -19,6 +18,10 @@ class App : Application() {
 //extension для получения appComponent
 val Context.appComponent: AppComponent
     get() = when (this) {
-        is App -> appComponent
-        else -> applicationContext.appComponent
+        is App -> checkNotNull(appComponent) {
+            "AppComponent isn't initialized"
+        }
+        else -> checkNotNull(applicationContext.appComponent) {
+            "AppComponent isn't initialized"
+        }
     }
