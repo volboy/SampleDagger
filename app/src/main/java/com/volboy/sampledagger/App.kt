@@ -3,6 +3,7 @@ package com.volboy.sampledagger
 import android.app.Application
 import android.content.Context
 import com.volboy.sampledagger.dagger.AppComponent
+import com.volboy.sampledagger.dagger.AppDependencies
 import com.volboy.sampledagger.dagger.DaggerAppComponent
 
 class App : Application() {
@@ -13,8 +14,14 @@ class App : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent
             .builder()
-            .context(this)
+            .appDependencies(AppDependenciesImpl(this))
             .build()
+    }
+
+    inner class AppDependenciesImpl(
+        override val context: Context
+    ) : AppDependencies {
+
     }
 }
 
