@@ -1,15 +1,15 @@
 package com.volboy.sampledagger
 
 import android.util.Log
+import com.volboy.sampledagger.dagger.Prod
 import javax.inject.Inject
-import javax.inject.Named
 
 interface Repository {
     fun getData()
 }
 
 class RepositoryImpl @Inject constructor(
-    @param:Named("prod")
+    @Prod
     private val networkProvider: NetworkProvider) : Repository {
     override fun getData() {
         Log.i("TAG", "call get data")
